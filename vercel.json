@@ -5,7 +5,8 @@
       "src": "server/vercel.ts",
       "use": "@vercel/node",
       "config": {
-        "includeFiles": ["server/**", "shared/**", "client/dist/**"]
+        "includeFiles": ["server/**", "shared/**", "dist/public/**"],
+        "runtime": "nodejs18.x"
       }
     }
   ],
@@ -18,10 +19,5 @@
       "src": "/(.*)",
       "dest": "/$1"
     }
-  ],
-  "functions": {
-    "server/vercel.ts": {
-      "runtime": "nodejs18.x"
-    }
-  }
+  ]
 }
