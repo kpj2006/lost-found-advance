@@ -8,5 +8,3 @@ vite.config.ts.*
 .local/
 attached_assets/
 .replit
-package-lock.json
-package.json
