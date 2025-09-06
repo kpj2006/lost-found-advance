@@ -1,11 +1,14 @@
 import { useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
+
+import { UserCircle } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { UserCircle } from "lucide-react";
-import { useApp } from "./home";
+
 import { api } from "../lib/api";
+import { useApp } from "./home";
 
 export function AuthPage() {
   const [email, setEmail] = useState("");
