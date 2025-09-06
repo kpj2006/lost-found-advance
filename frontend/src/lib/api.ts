@@ -1,10 +1,12 @@
 import { apiRequest } from "./queryClient";
 import type { AuthUser } from "../types";
 
+const BASE_URL = 'http://custom-backend-url.com'; // Replace with your actual backend URL
+
 export const api = {
   // Auth
   login: async (email: string, password: string): Promise<{ user: AuthUser }> => {
-    const response = await apiRequest("POST", "/api/auth/login", { email, password });
+    const response = await apiRequest("POST", BASE_URL + "/api/auth/login", { email, password });
     return response.json();
   },
 
@@ -14,7 +16,7 @@ export const api = {
     formData.append('image', imageFile);
     formData.append('type', type);
     
-    const response = await fetch("/api/analyze-image", {
+    const response = await fetch(BASE_URL + "/api/analyze-image", {
       method: "POST",
       body: formData,
     });
@@ -28,61 +30,61 @@ export const api = {
 
   // AI prompt generation (legacy)
   generatePrompt: async (description: string, imageUrl: string, type: "found" | "lost"): Promise<{ prompt: string }> => {
-    const response = await apiRequest("POST", "/api/generate-prompt", { description, imageUrl, type });
+    const response = await apiRequest("POST", BASE_URL + "/api/generate-prompt", { description, imageUrl, type });
     return response.json();
   },
 
   // Found items
   createFoundItem: async (data: any) => {
-    const response = await apiRequest("POST", "/api/found-items", data);
+    const response = await apiRequest("POST", BASE_URL + "/api/found-items", data);
     return response.json();
   },
 
   getFoundItems: async () => {
-    const response = await apiRequest("GET", "/api/found-items");
+    const response = await apiRequest("GET", BASE_URL + "/api/found-items");
     return response.json();
   },
 
   getFoundItemsByUser: async (userId: string) => {
-    const response = await apiRequest("GET", `/api/found-items/user/${userId}`);
+    const response = await apiRequest("GET", BASE_URL + `/api/found-items/user/${userId}`);
     return response.json();
   },
 
   deleteFoundItem: async (id: string) => {
-    const response = await apiRequest("DELETE", `/api/found-items/${id}`);
+    const response = await apiRequest("DELETE", BASE_URL + `/api/found-items/${id}`);
     return response.json();
   },
 
   // Lost items
   createLostItem: async (data: any) => {
-    const response = await apiRequest("POST", "/api/lost-items", data);
+    const response = await apiRequest("POST", BASE_URL + "/api/lost-items", data);
     return response.json();
   },
 
   getLostItems: async () => {
-    const response = await apiRequest("GET", "/api/lost-items");
+    const response = await apiRequest("GET", BASE_URL + "/api/lost-items");
     return response.json();
   },
 
   // Chats
   createChat: async (data: any) => {
-    const response = await apiRequest("POST", "/api/chats", data);
+    const response = await apiRequest("POST", BASE_URL + "/api/chats", data);
     return response.json();
   },
 
   getChatsByUser: async (userId: string) => {
-    const response = await apiRequest("GET", `/api/chats/user/${userId}`);
+    const response = await apiRequest("GET", BASE_URL + `/api/chats/user/${userId}`);
     return response.json();
   },
 
   getChat: async (chatId: string) => {
-    const response = await apiRequest("GET", `/api/chats/${chatId}`);
+    const response = await apiRequest("GET", BASE_URL + `/api/chats/${chatId}`);
     return response.json();
   },
 
   // Messages
   sendMessage: async (data: any) => {
-    const response = await apiRequest("POST", "/api/messages", data);
+    const response = await apiRequest("POST", BASE_URL + "/api/messages", data);
     return response.json();
   },
 
@@ -93,7 +95,7 @@ export const api = {
     formData.append('chatId', chatId);
     formData.append('senderId', senderId);
     
-    const response = await fetch("/api/messages/image", {
+    const response = await fetch(BASE_URL + "/api/messages/image", {
       method: "POST",
       body: formData,
     });
